@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+
+    html{
+        scroll-behavior: smooth;
+    }
+   
+    *{box-sizing: border-box;} /*無敵星星*/
+
+
+    body{
+        color: #000000; /*內文文字色彩*/
+        font-family: Architects Daughter;/*字體*/
+        background-color: #c3c2c2;
+    }
+
+
+    main{
+    color: #fbfbff;
+    height: 350px;
+    width: 960;
+    padding-left: 10px;
+    padding-bottom: 100px;
+    padding: 20px;
+    background-image: url(photo/640.jpg);
+    background-size: cover;
+    border-radius:16px ;
+    margin: 20px; /*間格距離*/
+    font-size: 52px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+    }
+
+
+
+    body,h1,h2,h3,p{
+        margin: 0;
+    }
+    .wrap{ /*區塊左右置中*/
+        width: 960px;
+        margin-inline: auto;
+    }
+
+    section {
+        width: 100%;
+        display: flex;
+        gap: 20px;
+    }
+
+    .wrap {
+        width: 960px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #ffffff;
+    }
+
+    h2{
+        color: black; /**/
+        font-size: 40px;
+        font-weight: 700;
+        
+    }
+    header{
+        display: flex; /*橫排*/
+        align-items: center; /*讓Logo 跟 Menu 上下居中*/
+        padding:10px 20px;
+        margin-top: 20px;
+        position: sticky;
+        top: 20px;
+        box-shadow: 0 0 0 0 ;
+        background-color: #676767;/*橫排顏色*/
+        border-radius: 20px;
+      
+
+    }
+    header h1.logo{ /*撐開中間的距離*/
+        margin-right: auto;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+   
+    header a{ /*清除超連結的底線*/
+        color: rgb(255, 255, 255);/*橫排字體顏色*/
+        text-decoration: none;
+        display: block; /*把超連結轉換成區塊(才可以設定寬高)*/
+    }
+
+    
+    .menu ul {
+        display: flex;/*橫排*/
+        gap: 16px;/*間格*/
+        list-style: none; /*隱藏列表圓點*/
+    }
+    .menu a{
+        padding: 6px 16px; /*把可以點選的範圍撐大*/
+        background-color: #000000;/*按鈕顏色*/
+        border-radius: 20px;
+    }
+    .menu a:hover{ /*滑鼠移上去之後的狀態*/
+        color: rgb(136, 136, 32);
+        background-color: #79985c;
+    }
+    a.anchor{/*自訂定位點*/
+        position: relative;
+        top: -115;
+        visibility: hidden;
+    }
+
+    a.top{
+        width: 60px;height: 60px;
+        border-radius: 30px;
+        color: #fbfbff;
+        text-decoration: none;
+        background-color: #343434;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        }
+
+   
+    .card {cursor: pointer;}
+    .card_image {
+        border-top-left-radius: 50%;/*製作圓角*/
+        border-top-right-radius: 50%;/*製作圓角*/
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+
+        overflow: hidden;/*因藏超出圓角的部分*/
+    }
+    .card_image img {
+        font-family: fantasy;
+        display: block;
+        width: 100%;
+        aspect-ratio: 1;/*設定圖片的顯示長寬比*/
+        transition: 0.2s ease-out;/*轉場時間*/
+    }
+    .card_intro {/*調整文字邊距*/
+        padding: 12px 26px;
+        background-color: #c3c2c2;
+        border-radius:16px ;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #ffffff;
+    }
+    .card:hover .card_image img {
+        transform: scale(120%);/*放大效果*/
+    }
+
+    .portfolio {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;/*讓超出寬度的內容折行*/
+        width: 640px;/*這個寬度等於三張圖加上兩個 Gap 的總寬*/
+        margin-inline: auto;/*區塊居中設定*/
+    }
+    .portfolio a {
+        display: block;/*因為超連結不是區塊所以．．．*/
+        overflow: hidden;/*隱藏超出範圍的內容*/
+        transition: 0.2s;/*轉場效果*/
+    }
+    .portfolio a:hover {
+        box-shadow: 0 0 0 8px crimson;/*製作滑鼠移上去的紅色外框*/
+    }
+
+    .portfolio img {
+       
+        display: block;/*因為圖片不是區塊所以．．．*/
+        width: 200px; height: 200px;/*設定圖片尺寸*/
+        object-fit: cover;/*讓圖片寬度套用上述尺寸(因為原圖比較大)*/
+        opacity: 0.7;/*設定透明度*/
+        transition: 0.2s;/*轉場效果*/
+    }
+    .portfolio a:hover img {
+        opacity: 1;/*設定滑鼠移上去之後的透明度*/
+        transform: scale(1.2);/*設定滑鼠移上去之後的圖片大小*/
+    }
+
+    .lb-data .lb-caption {font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 16px;
+
+    }
+    .text{
+        padding:40px 100px;
+        height: 400px;
+        width: 600px;
+       
+        
+      
+    }
+    .image{
+        height:250px;
+        width: 200px;
+        padding-left: 100px;
+        border-top-left-radius: 50%;/*製作圓角*/
+        border-top-right-radius: 50%;/*製作圓角*/
+        background-image: url(photo/913431.jpg); 
+    }
+    .about{
+        height: 360px;
+        margin: 20px; /*間格距離*/
+        padding: 10px 20px; /*調整內邊距*/
+        border-radius: 20px; /*圓角*/
+        background-color: #c3c2c2;
+       
+    }
+
+    
+
+  
+
+    .graphic{
+        background-color: rgba(176, 176, 176, 0) ;/*區塊背景*/
+        height: 700px;
+        margin: 20px; /*間格距離*/
+        padding: 10px 20px; /*調整內邊距*/
+        border-radius: 20px; /*圓角*/ 
+    }
+
+    .photo{
+        background-color:#c3c2c2 ;/*區塊背景*/
+        height: 720px;
+        margin: 20px; /*間格距離*/
+        padding: 10px 20px; /*調整內邊距*/
+        border-radius: 20px; /*圓角*/   
+    }
+
+    .card-about{
+        display: flex;
+        margin-right: auto;
+    }
+
+    footer{
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #676767;
+    height: 30px;
+    align-items: center;
+    }
+</style>
+
+</head>
+<body>   
+
+
+<a href="#" class="top">TOP</a>
+<div class="wrap"> 
+    <header>
+        <h1 class="logo">
+           <a href="#"> Shih-Yao</a>
+        </h1>
+        <nav class="menu">
+        <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#graphic design">Graphic Design</a></li>
+        <li><a href="#photography">Photography</a></li>
+        </ul>
+        </nav>
+    </header>
+
+
+    <main>
+
+        Shih-Yao,Lee
+        
+        <h3>李詩瑤</h3>
+    </main>
+    
+ 
+    <section>
+    <div class="card">
+        <div class="card_image"><img src="photo/913952_0.jpg" alt="可以自己換圖"></div>
+        <div class="card_intro">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, voluptates illo molestias odio aperiam sit error laudantium. Quam itaque odit vel praesentium modi odio error optio est, autem voluptatem natus.
+        </div>
+    </div>
+   
+    <div class="card">
+        <div class="card_image"><img src="photo/913953_0.jpg" alt="可以自己換圖"></div>
+        <div class="card_intro">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, voluptates illo molestias odio aperiam sit error laudantium. Quam itaque odit vel praesentium modi odio error optio est, autem voluptatem natus.
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card_image"><img src="photo/913954_0.jpg" alt="可以自己換圖"></div>
+        <div class="card_intro">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, voluptates illo molestias odio aperiam sit error laudantium. Quam itaque odit vel praesentium modi odio error optio est, autem voluptatem natus.
+        </div>
+    </div>
+    <div class="wrap-all">
+    </section>
+
+<!--區塊about-->  
+    <a class="anchor" id="about"></a>
+    <div class="about">
+        <h2>About</h2>
+
+        <div class="card-about">
+        <div class="image"></div>
+
+        <div class="text">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, eos alias. Corporis nulla, reprehenderit commodi iste mollitia excepturi. Non repellat error, earum ducimus veniam molestias reiciendis nesciunt quis beatae maiores.
+        </div>
+
+    </div>
+    </div>  
+<!--區塊about-->    
+
+<!--區塊graphic-->
+    <a class="anchor" id="graphic design"></a>
+    
+    <div class="graphic">
+        <h2>Graphic Design</h2>
+         <div>
+            <section class="portfolio">
+                <div>
+                    <a href="Graphic Design/1.jpg" data-lightbox="christmas" data-title="Christmas Collection 01">
+                        <img src="Graphic Design/1.jpg" alt="">
+                    </a>
+                </div>
+                <div>
+                    <a href="Graphic Design/2.jpg" data-lightbox="christmas" data-title="Christmas Collection 02">
+                        <img src="Graphic Design/2.jpg" alt="">
+                    </a>
+                </div>
+                <div>
+                    <a href="Graphic Design/3.jpg" data-lightbox="christmas" data-title="Christmas Collection 03">
+                    <img src="Graphic Design/3.jpg" alt="">
+                </a>
+                </div>
+
+                <div>
+                    <a href="Graphic Design/圖片1.jpg" data-lightbox="christmas" data-title="Christmas Collection 01">
+                        <img src="Graphic Design/圖片1.jpg" alt="">
+                    </a>
+                </div>
+                <div>
+                    <a href="Graphic Design/圖片2.jpg" data-lightbox="christmas" data-title="Christmas Collection 02">
+                        <img src="Graphic Design/圖片2.jpg" alt="">
+                    </a>
+                </div>
+                <div>
+                    <a href="Graphic Design/圖片3.jpg" data-lightbox="christmas" data-title="Christmas Collection 03">
+                    <img src="Graphic Design/圖片3.jpg" alt="">
+                </a>
+                </div>
+
+                
+            </div>
+
+          </div>
+ 
+        </script>
+        </section>
+    
+<!--區塊graphic-->
+
+
+<!--區塊photo-->
+    <a class="anchor" id="photography"></a>
+   <div class="photo">
+        <h2>Photography</h2>
+             <div>
+                <section class="portfolio">
+                    <div>
+                        <a href="photo/913952_0.jpg" data-lightbox="christmas" data-title="Christmas Collection 01">
+                            <img src="photo/913952_0.jpg" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="photo/913953_0.jpg" data-lightbox="christmas" data-title="Christmas Collection 02">
+                            <img src="photo/913953_0.jpg" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="photo/913954_0.jpg" data-lightbox="christmas" data-title="Christmas Collection 03">
+                        <img src="photo/913954_0.jpg" alt="">
+                    </a>
+                    </div>
+
+                    <div>
+                        <a href="photo/128018150_3349055881888498_9144074863556739519_n.jpg" data-lightbox="christmas" data-title="Christmas Collection 01">
+                            <img src="photo/128018150_3349055881888498_9144074863556739519_n.jpg" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="photo/117971721_3054321678028588_7008778877289876607_n.jpg" data-lightbox="christmas" data-title="Christmas Collection 02">
+                            <img src="photo/117971721_3054321678028588_7008778877289876607_n.jpg" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="photo/117868120_3054323604695062_109824937088672317_n.jpg" data-lightbox="christmas" data-title="Christmas Collection 03">
+                        <img src="photo/117868120_3054323604695062_109824937088672317_n.jpg" alt="">
+                    </a>
+                    </div>
+                
+                    
+                </div>
+    
+           
+     
+            </script>
+            </section>
+        
+        
+
+
+
+    </div>
+<!--區塊photo-->
+
+    <footer>
+    2024 Shih-Yao,Lee
+    </footer>
+</div>
+    
+</div>
+<!--JavaScript-->
+<script src="lightbox.min.js"></script>
+<script src="lightbox-plus-jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
